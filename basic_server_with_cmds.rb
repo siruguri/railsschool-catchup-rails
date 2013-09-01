@@ -9,14 +9,19 @@ logger=Logger.new(STDOUT)
 server = TCPServer.new 3000 # Server bound to port 3000, just like Rails
 
 loop do
-  client = server.accept
+  incoming = server.accept
+  line = incoming.gets
+  line=line.chomp
 
-  cmd=""
-  while line = client.gets
-    cmd += line
+  logger.info("Received mesg #{line} - assuming #{line} is a file...")
+
+  if File.exists? line
+    logger.info("Found file!")
+    incoming.puts File.size? line
+  else
+    logger.info("Didn't find file!")
+    incoming.puts -1
   end
 
-  client.puts("Thanks for your message of #{cmd}")
-  logger.info("Sent mesg #{Time.now}.")
-  client.close
+  incoming.close
 end
