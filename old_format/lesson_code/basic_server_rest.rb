@@ -25,6 +25,10 @@ loop do
     resource_id = path_components[2]
   end
 
-  incoming.puts "Returning resource named #{resource_name} with ID #{resource_id}"
+  if line.length > 3
+    action = path_components[3]
+  end
+
+  incoming.puts "Trying action #{action} on resource named #{resource_name} with ID #{resource_id}"
   incoming.close
 end

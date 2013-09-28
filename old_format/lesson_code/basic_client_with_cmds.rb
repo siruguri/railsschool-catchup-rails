@@ -4,7 +4,8 @@ hostname = 'localhost'
 port = 3000 # Just like Rails :)
 
 s = TCPSocket.open(hostname, port)
-s.puts('a.txt')
+# s.puts('a.txt')
+s.puts(ARGV[0])
 
 # Use a command line argument instead of a hard-coded value
 
