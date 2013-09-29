@@ -1,0 +1,55 @@
+<ul>
+<li>
+<a href="#toc_0">A New Application</a>
+</li>
+<li>
+<a href="#toc_1">The Routes File</a>
+</li>
+<li>
+<a href="#toc_2">Let The Rails Magic Begin</a>
+</li>
+</ul>
+<p><link href="markdown.css" rel="stylesheet"></link></p>
+
+<h1 id="toc_0">A New Application</h1>
+
+<p>To start off, let&rsquo;s create a new Rails application by running the following command:</p>
+
+<p># We are going to create an application and name it blogger.
+   rails new blogger</p>
+
+<h1 id="toc_1">The Routes File</h1>
+
+<p>The most basic aspect of a Rails application is the <code>routes.rb</code> file, which will be in the <code>config</code> folder.</p>
+
+<p>The structure of the routes file mimics that of the conventions we&rsquo;ve seen in the introduction - there is a command, followed by a resource, and a corresponding <em>controller</em> that will handle the request for that resource.</p>
+
+<p>Before going ahead, it&rsquo;s useful to know that RoR uses a different vocabulary for the concepts we&rsquo;ve discussed so far:</p>
+
+<ul>
+<li>Resources are called <em>routes</em> in some cases, and <em>paths</em> in others (we&rsquo;ll see which is where, shortly.)</li>
+</ul>
+
+<p>Let&rsquo;s try out a simple command and controller. After writing the code in <code>blogger_simple</code>, you can start your server by running the following command:</p>
+<div class=mycode>
+rails&nbsp;server
+</div>
+
+<p>This will start a server that will &ldquo;listen in&rdquo; at port 3000, by default. You will access this in your browser by typing <code>http://localhost:3000</code>. Note that you usually leave out the 3000 part when you go to most websites, and that&rsquo;s because the default port at which a server listens in is <strong>80</strong>, and browsers have been written to assume that if you don&rsquo;t specify a port, you mean <strong>80</strong>.</p>
+
+<h1 id="toc_2">Let The Rails Magic Begin</h1>
+
+<p>As we walk through the code in class, you&rsquo;ll notice that Rails will
+spit out errors that will tell you what its expectations are,
+regarding how it parses the entries in the routes file. These
+expectations are part of the many conventions that the Rails framework
+will impose on you - not all of these are documented well. Some you&rsquo;ll
+encounter in different books and tutorials; some you&rsquo;ll stumble over
+on your Rails journey and maybe spend a couple of days debugging
+before you understand them.</p>
+
+<ul>
+<li>When you specify the &ldquo;destination&rdquo; of a route as <code>&lt;</code><strong>name</strong><code>&gt;#&lt;action_method&gt;</code>, Rails will expect that the controller is defined in a file called <strong>name</strong><code>_controller.rb</code>, <strong>and</strong> that this controller will be a Ruby class named <strong>name</strong><code>Controller</code></li>
+</ul>
+
+<p>and end.</p>

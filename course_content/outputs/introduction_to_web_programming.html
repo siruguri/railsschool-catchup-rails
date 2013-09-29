@@ -15,6 +15,14 @@
 </li>
 <li>
 <a href="#toc_4">What Is A Web Application?</a>
+<ul>
+<li>
+<a href="#toc_5">Follow The Protocol</a>
+</li>
+<li>
+<a href="#toc_6">The Resource</a>
+</li>
+</ul>
 </li>
 </ul>
 <p><link href="markdown.css" rel="stylesheet"></link></p>
@@ -56,4 +64,29 @@ application easily, and that&rsquo;s what we&rsquo;ll be exploring.</p>
 
 <p>A web application is typically a program running on a machine that is accessible to a network, usually the global network of computers that we call the World Wide Web. Since around the late 2000&rsquo;s, it&rsquo;s also become common to refer to web applications as applications that are running &ldquo;in the cloud.&rdquo;</p>
 
-<p>Most web applications allow </p>
+<h2 id="toc_5">Follow The Protocol</h2>
+
+<p>Most web applications communicate using a specific <em>protocol</em>, which is another way of saying that your application understands certain commands, and responds to them in certain ways. If you&rsquo;re writing an application, you do have the choice of defining your own protocol but you&rsquo;re probably better off using something that&rsquo;s already well-known.</p>
+
+<p>Most web applications rely on a protocol called <em>HTTP</em> or <strong>Hypter Text Transfer Protocol</strong>. The intricacies of HTTP are described in a series of documents called Requests For Comments or RFCs: <a href="http://www.isi.edu/in-notes/rfc1945.txt">RFC 1945</a> and <a href="http://www.ietf.org/rfc/rfc2616.txt">RC 2616</a> being two of the most prominent.</p>
+
+<p>These RFCs are pretty dense to read but the crux of all of these can be summarized, roughly, into the following rules:</p>
+
+<ul>
+<li>An HTTP transaction consists of a <em>request</em> and a <em>response</em>.</li>
+<li>A request can have one of the following commands: <strong>GET</strong>, <strong>PUT</strong>, <strong>DELETE</strong>, <strong>POST</strong> (and some others we won&rsquo;t bother about for the purpose of this tutorial.</li>
+<li>The command will point to a <em>resource</em>.</li>
+</ul>
+
+<h2 id="toc_6">The Resource</h2>
+
+<p>For the purpose of pretty much the rest of this tutorial, the most important aspect of the request that you need to understand is the <em>resource</em>.</p>
+
+<p>Resources in the HTTP protocol are written in the following manner:
+  * A series of strings, separated by the <code>/</code> character
+  * The first occurrence of a <code>?</code> character will be expected to be followed by a series of key/value pairs in the <code>X=Y</code> format
+  * The first occurrence of a <code>#</code> character will be considered to mark the last part of the resource description</p>
+
+<p>The portion of the resource after the first occurrence of the <code>?</code> character is usually referred to as the <em>URL parameters</em> or the <em>query parameters</em>.</p>
+
+<p>In the code sample <strong>1</strong> attached to these lessons, you can see how this convention is translated in the PHP programming language.</p>

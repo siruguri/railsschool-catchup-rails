@@ -30,6 +30,8 @@ The [excellent RailsBridge guide to installing Rails](http://installfest.railsbr
 
 A web application is typically a program running on a machine that is accessible to a network, usually the global network of computers that we call the World Wide Web. Since around the late 2000's, it's also become common to refer to web applications as applications that are running "in the cloud."
 
+## Follow The Protocol
+
 Most web applications communicate using a specific _protocol_, which is another way of saying that your application understands certain commands, and responds to them in certain ways. If you're writing an application, you do have the choice of defining your own protocol but you're probably better off using something that's already well-known.
 
 Most web applications rely on a protocol called _HTTP_ or **Hypter Text Transfer Protocol**. The intricacies of HTTP are described in a series of documents called Requests For Comments or RFCs: [RFC 1945](http://www.isi.edu/in-notes/rfc1945.txt) and [RC 2616](http://www.ietf.org/rfc/rfc2616.txt) being two of the most prominent.
@@ -38,9 +40,20 @@ These RFCs are pretty dense to read but the crux of all of these can be summariz
 
 * An HTTP transaction consists of a _request_ and a _response_.
 * A request can have one of the following commands: **GET**, **PUT**, **DELETE**, **POST** (and some others we won't bother about for the purpose of this tutorial.
-* The command will point to a _resource_, which will be written in the following manner:
+* The command will point to a _resource_.
+
+## The Resource
+
+For the purpose of pretty much the rest of this tutorial, the most important aspect of the request that you need to understand is the _resource_.
+
+Resources in the HTTP protocol are written in the following manner:
   * A series of strings, separated by the `/` character
   * The first occurrence of a `?` character will be expected to be followed by a series of key/value pairs in the `X=Y` format
   * The first occurrence of a `#` character will be considered to mark the last part of the resource description
 
-The portion of the resource after the first occurrence of the `?` character is usually referred to as the _URL parameters_ or the _query parameters_. 
+The portion of the resource after the first occurrence of the `?` character is usually referred to as the _URL parameters_ or the _query parameters_.
+
+In the code sample **1** attached to these lessons, you can see how this convention is translated in the PHP programming language.
+
+
+
