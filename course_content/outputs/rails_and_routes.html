@@ -8,6 +8,9 @@
 <li>
 <a href="#toc_2">Let The Rails Magic Begin</a>
 </li>
+<li>
+<a href="#toc_3">CatWalking: What To Do With Models</a>
+</li>
 </ul>
 <p><link href="markdown.css" rel="stylesheet"></link></p>
 
@@ -49,7 +52,37 @@ on your Rails journey and maybe spend a couple of days debugging
 before you understand them.</p>
 
 <ul>
-<li>When you specify the &ldquo;destination&rdquo; of a route as <code>&lt;</code><strong>name</strong><code>&gt;#&lt;action_method&gt;</code>, Rails will expect that the controller is defined in a file called <strong>name</strong><code>_controller.rb</code>, <strong>and</strong> that this controller will be a Ruby class named <strong>name</strong><code>Controller</code></li>
+<li>When you specify the &ldquo;destination&rdquo; of a route as <code>&lt;</code><strong>name</strong><code>&gt;#&lt;action_method&gt;</code>, Rails will expect that the controller is defined in a file called <strong>name</strong><code>_controller.rb</code>, <strong>and</strong> that this controller will be a Ruby class named <strong>name</strong><code>Controller</code>
+
+<ul>
+<li>Note that routes match only resources, not query parameters.</li>
+</ul></li>
+<li>When the controller ends execution, Rails will then expect a &ldquo;template&rdquo; file in the <code>app/views</code> folder, which will be responsible for generating the HTML to be rendered in your browser.</li>
 </ul>
 
-<p>and end.</p>
+<h1 id="toc_3">CatWalking: What To Do With Models</h1>
+
+<p>Pretty much any web application will need a <em>persistence layer</em>. That is the system that stores the data your app generates and uses. The persistence layer is usually a database of some kind. <em>Models</em> are the way in which a web framework - like Rails - helps you interact with a database, by providing a &ldquo;layer of abstraction&rdquo; that makes it easy to handle the data without having to repeatedly write the corresponding database (SQL) commands.</p>
+
+<p>Note that while SQL - <strong>S</strong>tructured <strong>Q</strong>uery <strong>L</strong>anguage - is the
+most common language for communicating with databases (specifically,
+with <em>relational</em> databases), there are also many so-called <a href="http://www.techrepublic.com/blog/10-things/10-things-you-should-know-about-nosql-databases/">&ldquo;NoSQL&rdquo;
+databases</a> that don&rsquo;t use SQL for database manipulation.</p>
+
+<p>For our purposes, we will build a simple blogging platform. The platform will have to model only one type of data - a post.</p>
+
+<p>It will have two <em>routes</em>:</p>
+
+<ul>
+<li><code>/post/list</code></li>
+<li><code>/post/create</code></li>
+</ul>
+
+<p>Each post will have the following <em>attributes</em>: </p>
+
+<ul>
+<li>The body (this is Twitter-style blogging: no title, just the body)</li>
+<li>The posted date</li>
+</ul>
+
+<p>For this lesson, we&rsquo;ll try to build our models manually in a file.</p>

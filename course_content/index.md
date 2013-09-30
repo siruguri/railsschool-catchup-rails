@@ -1,9 +1,10 @@
 # Rails Courses
 
-There are 2 courses so far. The attached code in [the repo that this material is stored on](https://github.com/siruguri/railsschool-catchup-rails) is related to this material, and is referred to in various parts of this tutorial.
+There are 3 courses so far. The attached code in [the repo that this material is stored on](https://github.com/siruguri/railsschool-catchup-rails) is related to this material, and is referred to in various parts of this tutorial.
 
 * [An Introduction To Web Programming](introduction_to_web_programming.html)
 * [Rails and Routes](rails_and_routes.html)
+* [Models On A Scaffold](models_on_a_scaffold.html)
 
 # A Small Note on Font Colors
 

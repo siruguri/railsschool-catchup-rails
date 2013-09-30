@@ -1,0 +1,41 @@
+<ul>
+<li>
+<a href="#toc_0">The Bare Bones of Rails</a>
+<ul>
+<li>
+<a href="#toc_1">Scaffolds and Skeletons</a>
+</li>
+</ul>
+</li>
+</ul>
+<p><link href="markdown.css" rel="stylesheet"></link></p>
+
+<h1 id="toc_0">The Bare Bones of Rails</h1>
+
+<h2 id="toc_1">Scaffolds and Skeletons</h2>
+
+<p>Putting all the pieces of a model - creation, display, deleting - by yourself is a tedious process. So Rails makes it easy for you by giving you a command called <code>rails generate</code></p>
+
+<p>rails generate scaffold Post body:string posted_on:datetime
+   # You can also type in &lsquo;g&rsquo; instead of &lsquo;generate&rsquo;, as a shortcut</p>
+
+<p>The <code>rails generate scaffold</code> command does the following:</p>
+
+<ul>
+<li>Create a set of routes for this model, using the <code>resources</code> method in the <code>routes.rb</code> file</li>
+<li>Create a model that has the attributes with the data types specified in the <code>rails generate</code> command
+
+<ul>
+<li>Also, create the <em>database migration</em> needed to capture this in your database</li>
+</ul></li>
+<li>Generate views to view an individual instance, view a list of all instances, create an instance and delete an instance</li>
+<li>Generate the controllers corresponding to these views</li>
+</ul>
+
+<p>You can also do these steps through <code>rails generate</code> individually (except for the addition of the route set, which you&rsquo;d have to do via your editor), by running them in this order:</p>
+<div class=mycode>
+rails&nbsp;generate&nbsp;model&nbsp;Post&nbsp;body:string&nbsp;posted_on:datetime<br/>
+rails&nbsp;generate&nbsp;controller&nbsp;Post&nbsp;<span style='color: red'>#&nbsp;This&nbsp;generates&nbsp;the&nbsp;views&nbsp;too.</span>
+</div>
+
+<p>The End</p>

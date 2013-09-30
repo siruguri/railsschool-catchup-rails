@@ -1,0 +1,37 @@
+<ul>
+<li>
+<a href="#toc_0">To The Console!</a>
+</li>
+</ul>
+<p><link href="markdown.css" rel="stylesheet"></link></p>
+
+<h1 id="toc_0">To The Console!</h1>
+
+<p>As you start building your app, you should start getting familiar with your friendly neighborhood debugger - the <code>rails console</code>.</p>
+
+<p>The console is an interactive, command-line interface - you can read what those are in the <a href="http://sameer.siruguri.net/railsschool-ruby/v2/index.html">Beginner&rsquo;s Ruby course material</a>, if this is not familiar to you.</p>
+
+<p>You have to run the console in the root folder of your app (or in any subfolder, actually.) You will see a prompt, where you can query your models:</p>
+<div class=mycode>
+rails&nbsp;console<br/>
+irb(main):001:0>&nbsp;Post.all<br/>
+Post&nbsp;Load&nbsp;(0.2ms)&nbsp;&nbsp;SELECT&nbsp;"posts".*&nbsp;FROM&nbsp;"posts"<br/>
+<span style='color: blue'>=>&nbsp;[]</span>
+</div>
+
+<p>This app doesn&rsquo;t have any data in it yet, because we haven&rsquo;t created any instances of your <code>Post</code> model. Let&rsquo;s do that, via the <code>console</code>:</p>
+<div class=mycode>
+irb(main):002:0>&nbsp;Post.create(body:&nbsp;'My&nbsp;first&nbsp;post!',&nbsp;posted_on:&nbsp;'2013-09-25')<br/>
+(0.1ms)&nbsp;&nbsp;begin&nbsp;transaction<br/>
+<span style='color: red'>#&nbsp;&ndash;&nbsp;These&nbsp;comments&nbsp;aren't&nbsp;in&nbsp;the&nbsp;actual&nbsp;output&nbsp;-&nbsp;they're&nbsp;part&nbsp;of&nbsp;</span><br/>
+<span style='color: red'>#&nbsp;&ndash;&nbsp;the&nbsp;lesson&nbsp;narration.&nbsp;Notice&nbsp;the&nbsp;SQL&nbsp;command&nbsp;being&nbsp;generated.</span><br/>
+SQL&nbsp;(33.4ms)&nbsp;&nbsp;INSERT&nbsp;INTO&nbsp;"posts"&nbsp;("body",&nbsp;"created_at",&nbsp;"posted_on",<br/>
+"updated_at")&nbsp;VALUES&nbsp;(?,&nbsp;?,&nbsp;?,&nbsp;?)&nbsp;&nbsp;[["body",&nbsp;"My&nbsp;first&nbsp;post!"],<br/>
+["created_at",&nbsp;Mon,&nbsp;30&nbsp;Sep&nbsp;2013&nbsp;04:04:50&nbsp;UTC&nbsp;+00:00],&nbsp;["posted_on",<br/>
+Wed,&nbsp;25&nbsp;Sep&nbsp;2013&nbsp;00:00:00&nbsp;UTC&nbsp;+00:00],&nbsp;["updated_at",&nbsp;Mon,&nbsp;<br/>
+30&nbsp;Sep&nbsp;2013&nbsp;04:04:50&nbsp;UTC&nbsp;+00:00]]<br/>
+<span style='color: red'>#&nbsp;&ndash;&nbsp;End&nbsp;of&nbsp;SQL</span><br/>
+(1.9ms)&nbsp;&nbsp;commit&nbsp;transaction
+</div>
+
+<p>If you now run <code>Post.all</code>, you&rsquo;ll find that your first post is available to you as a Ruby object.</p>
