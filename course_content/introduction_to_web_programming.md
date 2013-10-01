@@ -22,9 +22,10 @@ application easily, and that's what we'll be exploring.
 The [excellent RailsBridge guide to installing Rails](http://installfest.railsbridge.org/installfest/) is a great resource. The list below is essentially a summary of what they have recommended, condensed to three bullet points (or two depending on how you're counting):
 
 * **If your OS is Windows**: Your best bet is to install [RailsInstaller](http://www.railsinstaller.org) - the RailsBridge guide has a page [dedicated to instructions for RailsInstaller on Windows](http://installfest.railsbridge.org/installfest/windows). Note that if you have already installed Cygwin on your system, it might have come with an installation of Ruby that will conflict with RailsInstaller. We seriously recommend that you first uninstall Cygwin.
-* **If your OS is a Unix clone**: Which it should be, if you are going to do any serious Rails/Ruby development. The support for Rails/Ruby on Unix clones, like OSX, Ubuntu and Debian, is far superior to that on Windows. There are three ways you can end up with a Unix clone:
-  * Install one on Windows: This will allow you to take advantage of the cheap machines that Windows OS runs on, but the downside is that it's not easy to figure out which Unix version works well for the specific PC you have.
-  * Use an Apple machine: Yep, they are expensive, but they come closest to just "working out of the box" when you are doing web development that's not on the Microsoft stack.
+* **If your OS is a Unix clone** (and that includes OSX): Which it should be, if you are going to do any serious Rails/Ruby development. The support for Rails/Ruby on Unix clones, like OSX, Ubuntu and Debian, is far superior to that on Windows. There are three ways you can end up with a Unix clone:
+  * Install one on Windows: This will allow you to take advantage of the cheap machines that Windows OS runs on, but the downside is that it's not easy to figure out which Unix version works well for the specific PC you have. You can install [Cygwin](http://www.cygwin.com) instead of creating a partition for another OS, but beware that getting Ruby and RVM set up on Cygwin is not easy for the Unix newbie.
+  * Use an Apple machine: Yep, they are expensive, but they come closest to just "working out of the box" when you are doing web development that's not on the Microsoft stack. You can also install RailsInstaller on OSX (up to 10.8) The caveat with RailsInstaller is that it comes with Ruby 1.9, not 2.0; and with Rails 3.2, not 4.0 (all version information as of Oct 2013.)
+  * Set up an AWS instance: It's not terribly hard to do so - here are some quick instructions on walking you through the process](aws_quick_tips.html). Note that while setting up the instance is relatively easy and its in general easier and faster to get various packages for it, your instance is barebones: you'll have to go through the process of setting up a web server as well as Ruby and Rails on it yourself.
 
 # What Is A Web Application?
 
@@ -54,6 +55,3 @@ Resources in the HTTP protocol are written in the following manner:
 The portion of the resource after the first occurrence of the `?` character is usually referred to as the _URL parameters_ or the _query parameters_.
 
 In the code sample **1** attached to these lessons, you can see how this convention is translated in the PHP programming language.
-
-
-

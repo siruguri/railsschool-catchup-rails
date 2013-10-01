@@ -1,0 +1,55 @@
+<ul>
+<li>
+<a href="#toc_0">Setting Up A (Nearly Free) EC2 instance</a>
+<ul>
+<li>
+<a href="#toc_1">Pre-requisites</a>
+</li>
+<li>
+<a href="#toc_2">Instructions</a>
+</li>
+</ul>
+</li>
+</ul>
+<p><link href="markdown.css" rel="stylesheet"></link></p>
+
+<h1 id="toc_0">Setting Up A (Nearly Free) EC2 instance</h1>
+
+<p>If you need a VPS, you can create an AWS account with a credit card -
+the &ldquo;AWS Free Usage Tier&rdquo; is close enough to being free, as you&rsquo;ll
+only pay about a dollar a month for the corresponding storage. The
+tier allows you to launch an EC2 Micro instance, and the CPU is free
+for 1 year.</p>
+
+<h2 id="toc_1">Pre-requisites</h2>
+
+<p>This mini-guide assumes you already have familiarity with a command prompt, where you have installed SSL client tools, and can run the <code>ssh</code> command or something similar, like <a href="https://www.google.com/search?q=installing+putty"><code>puTTY</code></a>.</p>
+
+<h2 id="toc_2">Instructions</h2>
+
+<ul>
+<li>Once you&rsquo;ve created your AWS account on Amazon, log in to the AWS Management Console and click on &ldquo;EC2&rdquo;.</li>
+<li>click the blue &ldquo;Launch Instance&rdquo; button and complete the following steps:
+
+<ul>
+<li>Select the &ldquo;Quick Launch Wizard&rdquo; radio button</li>
+<li>Create a new key pair and save it in the <code>~/.ssh</code> directory on your local machine.</li>
+<li>Choose the Launch Configuration labeled &ldquo;Ubuntu Server 12.04.2 LTS&rdquo; and select the &ldquo;32-bit&rdquo; radio button. (Note that these options might change in the future - they were available as of Oct 2013.)</li>
+</ul></li>
+<li>Click &ldquo;Continue&rdquo;</li>
+<li>Click &ldquo;Launch&rdquo;.</li>
+</ul>
+
+<p>You should get a message that your instance is launching.</p>
+
+<p>If you get an error message that says &ldquo;Each network interface requires either a subnet or a network interface ID,&rdquo; you&rsquo;ve run into a minor AWS UI bug. In that case, close and open the Quick Launch Wizard, and repeat the above steps but don&rsquo;t click the &ldquo;Launch&rdquo; button. Instead, click &ldquo;Edit Details&rdquo; and then click &ldquo;Save Details&rdquo;. Now when you click the &ldquo;Launch&rdquo; button it should work.</p>
+
+<p>After your new instance comes up (usually takes a couple of minutes), find it in the instance list and look for its hostname. It will look something like <code>ec2-54-215-216-239.us-west-1.compute.amazonaws.com</code> (this is an example of an instance launched in the <code>us-west-1</code> zone; you might end up with a different default zone.)</p>
+
+<p>Shell into your instance from your command prompt:</p>
+<div class=mycode>
+$&nbsp;ssh&nbsp;ubuntu@ec2-54-215-216-239.us-west-1.compute.amazonaws.com&nbsp;-i&nbsp;~/.ssh/gabe-aws-personal.pem<br/>
+<span style='color: red'>#&nbsp;Replace&nbsp;the&nbsp;key&nbsp;file&nbsp;name&nbsp;with&nbsp;whatever&nbsp;you&nbsp;named&nbsp;your&nbsp;key&nbsp;file.</span>
+</div>
+
+<p>Once you can shell into your instance, you are ready for class.</p>
