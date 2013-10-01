@@ -2,6 +2,17 @@
 <li>
 <a href="#toc_0">To The Console!</a>
 </li>
+<li>
+<a href="#toc_1">A Few Modeling Tricks</a>
+<ul>
+<li>
+<a href="#toc_2">Setting Attributes</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_3">Advanced Topics</a>
+</li>
 </ul>
 <p><link href="markdown.css" rel="stylesheet"></link></p>
 
@@ -21,7 +32,7 @@ Post&nbsp;Load&nbsp;(0.2ms)&nbsp;&nbsp;SELECT&nbsp;"posts".*&nbsp;FROM&nbsp;"pos
 
 <p>This app doesn&rsquo;t have any data in it yet, because we haven&rsquo;t created any instances of your <code>Post</code> model. Let&rsquo;s do that, via the <code>console</code>:</p>
 <div class=mycode>
-irb(main):002:0>&nbsp;Post.create(body:&nbsp;'My&nbsp;first&nbsp;post!',&nbsp;posted_on:&nbsp;'2013-09-25')<br/>
+irb(main):002:0>&nbsp;p=Post.create(body:&nbsp;'My&nbsp;first&nbsp;post!',&nbsp;posted_on:&nbsp;'2013-09-25')<br/>
 (0.1ms)&nbsp;&nbsp;begin&nbsp;transaction<br/>
 <span style='color: red'>#&nbsp;&ndash;&nbsp;These&nbsp;comments&nbsp;aren't&nbsp;in&nbsp;the&nbsp;actual&nbsp;output&nbsp;-&nbsp;they're&nbsp;part&nbsp;of&nbsp;</span><br/>
 <span style='color: red'>#&nbsp;&ndash;&nbsp;the&nbsp;lesson&nbsp;narration.&nbsp;Notice&nbsp;the&nbsp;SQL&nbsp;command&nbsp;being&nbsp;generated.</span><br/>
@@ -34,4 +45,42 @@ Wed,&nbsp;25&nbsp;Sep&nbsp;2013&nbsp;00:00:00&nbsp;UTC&nbsp;+00:00],&nbsp;["upda
 (1.9ms)&nbsp;&nbsp;commit&nbsp;transaction
 </div>
 
+<p>Whenever you see code in this lesson, that starts with the <code>irb(main)</code> prompt, that&rsquo;s being run inside the Rails console.</p>
+
 <p>If you now run <code>Post.all</code>, you&rsquo;ll find that your first post is available to you as a Ruby object.</p>
+
+<h1 id="toc_1">A Few Modeling Tricks</h1>
+
+<p>Rails offers a plethora of ways of manipulating your models, via the corresponding Ruby classes that it creates. For example, your Post model is manipulated using the <code>Post</code> class, and its methods. You will learn these as you go along, getting deeper into Rails programming. </p>
+
+<h2 id="toc_2">Setting Attributes</h2>
+
+<p>You&rsquo;ve seen one way of setting attributes above - the <code>create</code> method, used to create a new instance of your model. Another way is to use the default <em>setter helper</em> functions that Rails creates for you:</p>
+<div class=mycode>
+irb(main):005:0>&nbsp;p=Post.find_by_id(1)<br/>
+Post&nbsp;Load&nbsp;(0.3ms)&nbsp;&nbsp;SELECT&nbsp;"posts".*&nbsp;&hellip;&nbsp;<br/>
+<span style='color: red'>#&nbsp;[truncated]</span><br/>
+irb(main):006:0>&nbsp;p.body="My&nbsp;first&nbsp;post&nbsp;(updated)!"<br/>
+=>&nbsp;"My&nbsp;first&nbsp;post&nbsp;(updated)!"<br/>
+irb(main):007:0>&nbsp;p.save<br/>
+(0.2ms)&nbsp;&nbsp;begin&nbsp;transaction<br/>
+(0.5ms)&nbsp;&nbsp;UPDATE&nbsp;"posts"&nbsp;SET&nbsp;"body"&nbsp;=&nbsp;'My&nbsp;first&nbsp;post&nbsp;(updated)!',<br/>
+"updated_at"&nbsp;=&nbsp;'2013-10-01&nbsp;20:56:43.831297'&nbsp;WHERE&nbsp;"posts"."id"&nbsp;=&nbsp;1<br/>
+(3.1ms)&nbsp;&nbsp;commit&nbsp;transaction&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+
+<p>Notice the helper methods we&rsquo;ve used here:</p>
+
+<ul>
+<li><code>find_by_id</code>: All models allow you to search in the database using the values of the table columns. Note that <code>id</code> is a column that&rsquo;s automatically created for every model. For the <code>Post</code> model we created, the other &ldquo;select helper&rdquo; functions would be <code>find_by_body</code> and <code>find_by_posted_on</code>, because those are the two attributes the model has.</li>
+<li><code>body</code>: You can change any specific attribute of a model instance - in this case, we changed the body of an existing post.</li>
+<li><code>save</code>: Calling the <code>save</code> method will - no surprise - attempt to save it to the database.</li>
+</ul>
+
+<h1 id="toc_3">Advanced Topics</h1>
+
+<ul>
+<li><strong>Validations</strong>: Read up on how validations work.</li>
+<li><strong>Callbacks</strong>: In the process of creating a new record in the database, or updating one, a series of <em>callbacks</em> are triggered - read up on how these work.</li>
+<li><strong>Expecting exceptions</strong>: There are two variations on the method used to save records - <code>save</code> vs. <code>save!</code> (<a href="https://github.com/rails/rails/blob/master/activerecord/lib/active_record/persistence.rb">the API documentation (look for the <code>save</code> method) is worth reading</a>. Here&rsquo;s <a href="http://m.onkey.org/save-save">a post that describes how you should think when to use which one</a>.</li>
+</ul>
