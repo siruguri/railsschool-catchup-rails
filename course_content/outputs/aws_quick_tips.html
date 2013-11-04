@@ -33,7 +33,7 @@ for 1 year.</p>
 
 <ul>
 <li>Select the &ldquo;Quick Launch Wizard&rdquo; radio button</li>
-<li>Create a new key pair and save it in the <code>~/.ssh</code> directory on your local machine.</li>
+<li>Create a new key pair and save it in the <code>~/.ssh</code> directory on your local machine. It will be saved with a <code>.pem</code> extension, by default.</li>
 <li>Choose the Launch Configuration labeled &ldquo;Ubuntu Server 12.04.2 LTS&rdquo; and select the &ldquo;32-bit&rdquo; radio button. (Note that these options might change in the future - they were available as of Oct 2013.)</li>
 </ul></li>
 <li>Click &ldquo;Continue&rdquo;</li>
@@ -48,8 +48,8 @@ for 1 year.</p>
 
 <p>Shell into your instance from your command prompt:</p>
 <div class=mycode>
-$&nbsp;ssh&nbsp;ubuntu@ec2-54-215-216-239.us-west-1.compute.amazonaws.com&nbsp;-i&nbsp;~/.ssh/gabe-aws-personal.pem<br/>
+$&nbsp;ssh&nbsp;ubuntu@[your-machine-name]&nbsp;-i&nbsp;~/.ssh/aws-personal-key.pem<br/>
 <span style='color: red'>#&nbsp;Replace&nbsp;the&nbsp;key&nbsp;file&nbsp;name&nbsp;with&nbsp;whatever&nbsp;you&nbsp;named&nbsp;your&nbsp;key&nbsp;file.</span>
 </div>
 
-<p>Once you can shell into your instance, you are ready for class.</p>
+<p>Once you can shell into your instance, you are ready to play around with your own Unix instance. Note though that the instance doesn&rsquo;t come with Ruby or Rails - you still have to <a href="https://help.ubuntu.com/10.04/serverguide/ruby-on-rails.html">install them</a>.</p>

@@ -54,6 +54,10 @@ Notice the helper methods we've used here:
 * `body`: You can change any specific attribute of a model instance - in this case, we changed the body of an existing post.
 * `save`: Calling the `save` method will - no surprise - attempt to save it to the database.
 
+# Form Vs. Content
+
+In the next section, we'll look at how to use the Rails framework to accept input from the browser instead.
+
 # Advanced Topics
 
 * **Validations**: Read up on how validations work - in the [Getting Started guide section on validations](http://guides.rubyonrails.org/getting_started.html#adding-some-validation), or in [Michael Hartl's excellent tutorial](http://ruby.railstutorial.org/chapters/modeling-users#sec-user_validations).

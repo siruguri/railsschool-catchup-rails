@@ -7,6 +7,12 @@
 </li>
 </ul>
 </li>
+<li>
+<a href="#toc_2">Migration: Setting Up Your Database</a>
+</li>
+<li>
+<a href="#toc_3">Advanced Topics</a>
+</li>
 </ul>
 <p><link href="markdown.css" rel="stylesheet"></link></p>
 
@@ -15,22 +21,32 @@
 <h2 id="toc_1">Scaffolds and Skeletons</h2>
 
 <p>Putting all the pieces of a model - creation, display, deleting - by yourself is a tedious process. So Rails makes it easy for you by giving you a command called <code>rails generate</code></p>
-
-<p>rails generate scaffold Post body:string posted_on:datetime
-   # You can also type in &lsquo;g&rsquo; instead of &lsquo;generate&rsquo;, as a shortcut</p>
+<div class=mycode>
+rails&nbsp;generate&nbsp;scaffold&nbsp;Post&nbsp;body:string&nbsp;posted_on:datetime<br/>
+<span style='color: red'>#&nbsp;You&nbsp;can&nbsp;also&nbsp;type&nbsp;in&nbsp;'g'&nbsp;instead&nbsp;of&nbsp;'generate',&nbsp;as&nbsp;a&nbsp;shortcut</span>
+</div>
 
 <p>The <code>rails generate scaffold</code> command does the following:</p>
 
 <ul>
-<li>Create a set of routes for this model, using the <code>resources</code> method in the <code>routes.rb</code> file</li>
+<li>Create a set of <em>RESTful</em> routes for this model, using the <code>resources</code> method in the <code>routes.rb</code> file</li>
 <li>Create a model that has the attributes with the data types specified in the <code>rails generate</code> command
 
 <ul>
 <li>Also, create the <em>database migration</em> needed to capture this in your database</li>
 </ul></li>
-<li>Generate views to view an individual instance, view a list of all instances, create an instance and delete an instance</li>
+<li>Generate views for the following:
+
+<ul>
+<li><strong>C</strong>reate: Create an instance</li>
+<li><strong>R</strong>ead: View an individual instance or a list of all instances</li>
+<li><strong>U</strong>pdate: Edit an instance, and</li>
+<li><strong>D</strong>elete: Yep, delete an instance</li>
+</ul></li>
 <li>Generate the controllers corresponding to these views</li>
 </ul>
+
+<p>Those four actions constitute the Four Horsemen of the RESTful Apocalypse (to be fanciful about it) - they are typically referred to as the <strong>CRUD</strong> actions for a RESTful resource.</p>
 
 <p>You can also do these steps through <code>rails generate</code> individually (except for the addition of the route set, which you&rsquo;d have to do via your editor), by running them in this order:</p>
 <div class=mycode>
@@ -38,4 +54,43 @@ rails&nbsp;generate&nbsp;model&nbsp;Post&nbsp;body:string&nbsp;posted_on:datetim
 rails&nbsp;generate&nbsp;controller&nbsp;Post&nbsp;<span style='color: red'>#&nbsp;This&nbsp;generates&nbsp;the&nbsp;views&nbsp;too.</span>
 </div>
 
-<p>The End</p>
+<p>When you use scaffolding, Rails magic works in some very specific ways:</p>
+
+<ul>
+<li>The model is named assuming the model name is in a singular form, and is capitalized.
+
+<ul>
+<li><strong>But</strong>: the corresponding database table is named in the plural form, and starts with a lowercase letter. So the name of the table for our <code>Post</code> model above, in the database, is <code>posts</code></li>
+</ul></li>
+<li>The controller is capitalized too, but it&rsquo;s named using the <em>plural</em> form of the model name. So the name of the controller created by <code>rails generate scaffold</code> is <code>PostsController</code> (note the plural.)</li>
+<li>The views are in a folder that&rsquo;s named by the plural form - so our views for the <code>Post</code> model are in the folder <code>app/views/posts</code></li>
+</ul>
+
+<h1 id="toc_2">Migration: Setting Up Your Database</h1>
+
+<p>But here&rsquo;s one thing that the <code>rails generate scaffold</code> magic won&rsquo;t do
+- it won&rsquo;t set up your database for you. That you have to do yourself,
+with the <code>rake</code> executable.<code>rake</code> comes with your Rails
+installation. It can be asked to perform <em>tasks</em>, and one of those
+tasks is to set up your database tables. That task is called
+<code>db:migrate</code>:</p>
+<div class=mycode>
+rake&nbsp;db:migrate
+</div>
+
+<h1 id="toc_3">Advanced Topics</h1>
+
+<p>Here are some more topics you can read once you&rsquo;ve become comfortable with the above material:</p>
+
+<ul>
+<li>What are the other data types you can create? 
+
+<ul>
+<li>Look into how the <code>text</code> datatype is different from the <code>string</code> datatype.</li>
+</ul></li>
+<li>What are the other ways of writing view files?
+
+<ul>
+<li>Look into what HAML is.</li>
+</ul></li>
+</ul>

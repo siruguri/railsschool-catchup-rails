@@ -52,11 +52,12 @@ application easily, and that&rsquo;s what we&rsquo;ll be exploring.</p>
 
 <ul>
 <li><strong>If your OS is Windows</strong>: Your best bet is to install <a href="http://www.railsinstaller.org">RailsInstaller</a> - the RailsBridge guide has a page <a href="http://installfest.railsbridge.org/installfest/windows">dedicated to instructions for RailsInstaller on Windows</a>. Note that if you have already installed Cygwin on your system, it might have come with an installation of Ruby that will conflict with RailsInstaller. We seriously recommend that you first uninstall Cygwin.</li>
-<li><strong>If your OS is a Unix clone</strong>: Which it should be, if you are going to do any serious Rails/Ruby development. The support for Rails/Ruby on Unix clones, like OSX, Ubuntu and Debian, is far superior to that on Windows. There are three ways you can end up with a Unix clone:
+<li><strong>If your OS is a Unix clone</strong> (and that includes OSX): Which it should be, if you are going to do any serious Rails/Ruby development. The support for Rails/Ruby on Unix clones, like OSX, Ubuntu and Debian, is far superior to that on Windows. There are three ways you can end up with a Unix clone:
 
 <ul>
-<li>Install one on Windows: This will allow you to take advantage of the cheap machines that Windows OS runs on, but the downside is that it&rsquo;s not easy to figure out which Unix version works well for the specific PC you have.</li>
-<li>Use an Apple machine: Yep, they are expensive, but they come closest to just &ldquo;working out of the box&rdquo; when you are doing web development that&rsquo;s not on the Microsoft stack.</li>
+<li>Install one on Windows: This will allow you to take advantage of the cheap machines that Windows OS runs on, but the downside is that it&rsquo;s not easy to figure out which Unix version works well for the specific PC you have. You can install <a href="http://www.cygwin.com">Cygwin</a> instead of creating a partition for another OS, but beware that getting Ruby and RVM set up on Cygwin is not easy for the Unix newbie.</li>
+<li>Use an Apple machine: Yep, they are expensive, but they come closest to just &ldquo;working out of the box&rdquo; when you are doing web development that&rsquo;s not on the Microsoft stack. You can also install RailsInstaller on OSX (up to 10.8) The caveat with RailsInstaller is that it comes with Ruby 1.9, not 2.0; and with Rails 3.2, not 4.0 (all version information as of Oct 2013.)</li>
+<li>Set up an AWS instance: It&rsquo;s not terribly hard to do so - here are some quick instructions on walking you through the process](aws<em>quick</em>tips.html). Note that while setting up the instance is relatively easy and its in general easier and faster to get various packages for it, your instance is barebones: you&rsquo;ll have to go through the process of setting up a web server as well as Ruby and Rails on it yourself.</li>
 </ul></li>
 </ul>
 
@@ -64,29 +65,49 @@ application easily, and that&rsquo;s what we&rsquo;ll be exploring.</p>
 
 <p>A web application is typically a program running on a machine that is accessible to a network, usually the global network of computers that we call the World Wide Web. Since around the late 2000&rsquo;s, it&rsquo;s also become common to refer to web applications as applications that are running &ldquo;in the cloud.&rdquo;</p>
 
+<p>The machine running the application is identified by an <em>IP address</em> or a <em>domain name</em>. Domain names are friendlier, or more readable versions, of an IP address - the process of mapping domain names to IP addresses is called <a href="http://en.wikipedia.org/wiki/Domain_Name_System">DNS resolution</a>.</p>
+
 <h2 id="toc_5">Follow The Protocol</h2>
 
 <p>Most web applications communicate using a specific <em>protocol</em>, which is another way of saying that your application understands certain commands, and responds to them in certain ways. If you&rsquo;re writing an application, you do have the choice of defining your own protocol but you&rsquo;re probably better off using something that&rsquo;s already well-known.</p>
 
-<p>Most web applications rely on a protocol called <em>HTTP</em> or <strong>Hypter Text Transfer Protocol</strong>. The intricacies of HTTP are described in a series of documents called Requests For Comments or RFCs: <a href="http://www.isi.edu/in-notes/rfc1945.txt">RFC 1945</a> and <a href="http://www.ietf.org/rfc/rfc2616.txt">RC 2616</a> being two of the most prominent.</p>
+<p>Most web applications rely on a protocol called <em>HTTP</em> or <strong>Hyper
+Text Transfer Protocol</strong>. The intricacies of HTTP are described in a
+series of documents called Requests For Comments or RFCs: <a href="http://www.isi.edu/in-notes/rfc1945.txt">RFC
+1945</a> and <a href="http://www.ietf.org/rfc/rfc2616.txt">RC
+2616</a> being two of the most
+prominent.</p>
 
 <p>These RFCs are pretty dense to read but the crux of all of these can be summarized, roughly, into the following rules:</p>
 
 <ul>
 <li>An HTTP transaction consists of a <em>request</em> and a <em>response</em>.</li>
-<li>A request can have one of the following commands: <strong>GET</strong>, <strong>PUT</strong>, <strong>DELETE</strong>, <strong>POST</strong> (and some others we won&rsquo;t bother about for the purpose of this tutorial.</li>
-<li>The command will point to a <em>resource</em>.</li>
+<li>A request itself consists of three components:
+
+<ul>
+<li>A <em>method</em>, which can have one of the following values: <strong>GET</strong>, <strong>PUT</strong>, <strong>DELETE</strong>, <strong>POST</strong> (and some others we won&rsquo;t bother about for the purpose of this tutorial.</li>
+<li>A <em>path</em>, which is the sequence of characters following the domain name to which the request is sent (the shortest possible path is the character <code>/</code>)</li>
+<li>A set of <em>query parameters</em>, which is a string of characters at the end of the path, separated from it by a <code>?</code></li>
+</ul></li>
+<li>The request points to a <em>resource</em> on the domain</li>
 </ul>
 
 <h2 id="toc_6">The Resource</h2>
 
-<p>For the purpose of pretty much the rest of this tutorial, the most important aspect of the request that you need to understand is the <em>resource</em>.</p>
+<p>For the purpose of pretty much the rest of this tutorial, the most important aspect of the request that you need to understand is the <em>path</em>, and how it will point to a <em>resource</em>.</p>
 
-<p>Resources in the HTTP protocol are written in the following manner:
-  * A series of strings, separated by the <code>/</code> character
-  * The first occurrence of a <code>?</code> character will be expected to be followed by a series of key/value pairs in the <code>X=Y</code> format
-  * The first occurrence of a <code>#</code> character will be considered to mark the last part of the resource description</p>
+<p>As discussed above, paths and query parameters are written in the
+following manner:</p>
 
-<p>The portion of the resource after the first occurrence of the <code>?</code> character is usually referred to as the <em>URL parameters</em> or the <em>query parameters</em>.</p>
+<ul>
+<li>The path starts with, and has components that are separated by, the <code>/</code> character</li>
+<li>The path ends with the first occurrence of a <code>?</code> character which announces the beginning of the query parameter string (or, simply, &lsquo;query string&rsquo;) </li>
+<li>The query string is a series of key/value pairs in the <code>X=Y</code> format</li>
+<li>The first occurrence of a <code>#</code> character announces the end of the path and query string.</li>
+</ul>
 
-<p>In the code sample <strong>1</strong> attached to these lessons, you can see how this convention is translated in the PHP programming language.</p>
+<p>The key-value pairs, written after the first occurrence of the <code>?</code> character, are also referred to as the <em>URL parameters</em>.</p>
+
+<p>In the code sample <strong>1</strong> attached to these lessons, you can see how
+this method/path/query string convention is translated into variables
+in the PHP programming language.</p>

@@ -18,51 +18,58 @@
 
 <p>To start off, let&rsquo;s create a new Rails application by running the following command:</p>
 
-<p># We are going to create an application and name it blogger.
-   rails new blogger</p>
+<p># We are going to create an application and name it <code>blogger_simple</code>.
+   rails new blogger_simple</p>
 
 <h1 id="toc_1">The Routes File</h1>
 
 <p>The most basic aspect of a Rails application is the <code>routes.rb</code> file, which will be in the <code>config</code> folder.</p>
 
-<p>The structure of the routes file mimics that of the conventions we&rsquo;ve seen in the introduction - there is a command, followed by a resource, and a corresponding <em>controller</em> that will handle the request for that resource.</p>
+<p>The structure of the routes file mimics that of the conventions we&rsquo;ve seen in the introduction - there is a method (though Rails has its own shorthand for methods that expand on the list we&rsquo;ve seen in the previous lesson), followed by a path to be matched to, and a corresponding <em>controller</em> that will handle the request for the resource this method/path combination point to.</p>
 
-<p>Before going ahead, it&rsquo;s useful to know that RoR uses a different vocabulary for the concepts we&rsquo;ve discussed so far:</p>
+<p>In Rails, the combination of method and path is called a <em>route</em>.</p>
 
-<ul>
-<li>Resources are called <em>routes</em> in some cases, and <em>paths</em> in others (we&rsquo;ll see which is where, shortly.)</li>
-</ul>
-
-<p>Let&rsquo;s try out a simple command and controller. After writing the code in <code>blogger_simple</code>, you can start your server by running the following command:</p>
+<p>Let&rsquo;s try out a simple command and controller. After downloading or
+writing the code in <code>blogger_simple</code>, you can start your server by
+changing to the folder <code>blogger_simple</code> and running the following
+command:</p>
 <div class=mycode>
 rails&nbsp;server
 </div>
 
-<p>This will start a server that will &ldquo;listen in&rdquo; at port 3000, by default. You will access this in your browser by typing <code>http://localhost:3000</code>. Note that you usually leave out the 3000 part when you go to most websites, and that&rsquo;s because the default port at which a server listens in is <strong>80</strong>, and browsers have been written to assume that if you don&rsquo;t specify a port, you mean <strong>80</strong>.</p>
+<p>This will start a server that will &ldquo;listen in&rdquo; at port 3000, by
+default. You will access this in your browser by typing
+<code>http://localhost:3000</code>. Note that you usually leave out the 3000 part
+when you go to most websites, and that&rsquo;s because the default port at
+which a server listens in is <strong>80</strong>, and browsers have been written to
+assume that if you don&rsquo;t specify a port, you mean <strong>80</strong>.</p>
 
 <h1 id="toc_2">Let The Rails Magic Begin</h1>
 
 <p>As we walk through the code in class, you&rsquo;ll notice that Rails will
-spit out errors that will tell you what its expectations are,
-regarding how it parses the entries in the routes file. These
-expectations are part of the many conventions that the Rails framework
-will impose on you - not all of these are documented well. Some you&rsquo;ll
-encounter in different books and tutorials; some you&rsquo;ll stumble over
-on your Rails journey and maybe spend a couple of days debugging
-before you understand them.</p>
+spit out errors that will tell you what its expectations are, as it
+parses the entries in the routes file. These expectations are part of
+the many conventions that the Rails framework will impose on you, a
+set of conventions that are sometimes referred to as &ldquo;Rails Magic.&rdquo;</p>
+
+<p>Not all of these tricks are documented well. Some you&rsquo;ll encounter in
+different books and tutorials; some you&rsquo;ll stumble over on your Rails
+journey and maybe spend a couple of days debugging before you
+understand them.</p>
 
 <ul>
-<li>When you specify the &ldquo;destination&rdquo; of a route as <code>&lt;</code><strong>name</strong><code>&gt;#&lt;action_method&gt;</code>, Rails will expect that the controller is defined in a file called <strong>name</strong><code>_controller.rb</code>, <strong>and</strong> that this controller will be a Ruby class named <strong>name</strong><code>Controller</code>
+<li>When you specify the &ldquo;destination&rdquo; of a route as <code>&lt;</code><strong>name</strong><code>&gt;#&lt;</code>action<em>method<code>&gt;</code>, Rails will expect that the controller is defined in a file called <strong>name</strong>`</em>controller.rb<code>, **and** that this controller will be a Ruby class named **Name**</code>Controller`
 
 <ul>
 <li>Note that routes match only resources, not query parameters.</li>
+<li>Note that the name of the file uses the lowercased name of the controller specified in the <code>routes.rb</code> file, but the Ruby class itself has to start with an uppercase letter because of Ruby conventions.</li>
 </ul></li>
 <li>When the controller ends execution, Rails will then expect a &ldquo;template&rdquo; file in the <code>app/views</code> folder, which will be responsible for generating the HTML to be rendered in your browser.</li>
 </ul>
 
 <h1 id="toc_3">CatWalking: What To Do With Models</h1>
 
-<p>Pretty much any web application will need a <em>persistence layer</em>. That is the system that stores the data your app generates and uses. The persistence layer is usually a database of some kind. <em>Models</em> are the way in which a web framework - like Rails - helps you interact with a database, by providing a &ldquo;layer of abstraction&rdquo; that makes it easy to handle the data without having to repeatedly write the corresponding database (SQL) commands.</p>
+<p>Pretty much any web application will need a <em>persistence layer</em>. That is the system that stores the data your app generates and uses. The persistence layer is usually a database of some kind. <em>Models</em> are the way in which a web framework - like Rails - helps you interact with a database, by providing an &ldquo;abstraction layer&rdquo; that makes it easy to handle the data without having to repeatedly write the corresponding database (SQL) commands.</p>
 
 <p>Note that while SQL - <strong>S</strong>tructured <strong>Q</strong>uery <strong>L</strong>anguage - is the
 most common language for communicating with databases (specifically,
@@ -84,5 +91,3 @@ databases</a> that don&rsquo;t use SQL for database manipulation.</p>
 <li>The body (this is Twitter-style blogging: no title, just the body)</li>
 <li>The posted date</li>
 </ul>
-
-<p>For this lesson, we&rsquo;ll try to build our models manually in a file.</p>

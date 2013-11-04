@@ -31,27 +31,42 @@ The [excellent RailsBridge guide to installing Rails](http://installfest.railsbr
 
 A web application is typically a program running on a machine that is accessible to a network, usually the global network of computers that we call the World Wide Web. Since around the late 2000's, it's also become common to refer to web applications as applications that are running "in the cloud."
 
+The machine running the application is identified by an _IP address_ or a _domain name_. Domain names are friendlier, or more readable versions, of an IP address - the process of mapping domain names to IP addresses is called [DNS resolution](http://en.wikipedia.org/wiki/Domain_Name_System).
+
 ## Follow The Protocol
 
 Most web applications communicate using a specific _protocol_, which is another way of saying that your application understands certain commands, and responds to them in certain ways. If you're writing an application, you do have the choice of defining your own protocol but you're probably better off using something that's already well-known.
 
-Most web applications rely on a protocol called _HTTP_ or **Hypter Text Transfer Protocol**. The intricacies of HTTP are described in a series of documents called Requests For Comments or RFCs: [RFC 1945](http://www.isi.edu/in-notes/rfc1945.txt) and [RC 2616](http://www.ietf.org/rfc/rfc2616.txt) being two of the most prominent.
+Most web applications rely on a protocol called _HTTP_ or **Hyper
+Text Transfer Protocol**. The intricacies of HTTP are described in a
+series of documents called Requests For Comments or RFCs: [RFC
+1945](http://www.isi.edu/in-notes/rfc1945.txt) and [RC
+2616](http://www.ietf.org/rfc/rfc2616.txt) being two of the most
+prominent.
 
 These RFCs are pretty dense to read but the crux of all of these can be summarized, roughly, into the following rules:
 
 * An HTTP transaction consists of a _request_ and a _response_.
-* A request can have one of the following commands: **GET**, **PUT**, **DELETE**, **POST** (and some others we won't bother about for the purpose of this tutorial.
-* The command will point to a _resource_.
+* A request itself consists of three components:
+  * A _method_, which can have one of the following values: **GET**, **PUT**, **DELETE**, **POST** (and some others we won't bother about for the purpose of this tutorial.
+  * A _path_, which is the sequence of characters following the domain name to which the request is sent (the shortest possible path is the character `/`)
+  * A set of _query parameters_, which is a string of characters at the end of the path, separated from it by a `?`.
+* The request points to a _resource_ on the domain.
 
 ## The Resource
 
-For the purpose of pretty much the rest of this tutorial, the most important aspect of the request that you need to understand is the _resource_.
+For the purpose of pretty much the rest of this tutorial, the most important aspect of the request that you need to understand is the _path_, and how it will point to a _resource_.
 
-Resources in the HTTP protocol are written in the following manner:
-  * A series of strings, separated by the `/` character
-  * The first occurrence of a `?` character will be expected to be followed by a series of key/value pairs in the `X=Y` format
-  * The first occurrence of a `#` character will be considered to mark the last part of the resource description
+As discussed above, paths and query parameters are written in the
+following manner:
 
-The portion of the resource after the first occurrence of the `?` character is usually referred to as the _URL parameters_ or the _query parameters_.
+  * The path starts with, and has components that are separated by, the `/` character
+  * The path ends with the first occurrence of a `?` character which announces the beginning of the query parameter string (or, simply, 'query string') 
+  * The query string is a series of key/value pairs in the `X=Y` format
+  * The first occurrence of a `#` character announces the end of the path and query string.
 
-In the code sample **1** attached to these lessons, you can see how this convention is translated in the PHP programming language.
+The key-value pairs, written after the first occurrence of the `?` character, are also referred to as the _URL parameters_.
+
+In the code sample **1** attached to these lessons, you can see how
+this method/path/query string convention is translated into variables
+in the PHP programming language.
