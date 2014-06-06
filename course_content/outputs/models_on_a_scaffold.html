@@ -9,9 +9,14 @@
 </li>
 <li>
 <a href="#toc_2">Migration: Setting Up Your Database</a>
+<ul>
+<li>
+<a href="#toc_3">Playing Around With Your Models</a>
+</li>
+</ul>
 </li>
 <li>
-<a href="#toc_3">Advanced Topics</a>
+<a href="#toc_4">Advanced Topics</a>
 </li>
 </ul>
 <p><link href="markdown.css" rel="stylesheet"></link></p>
@@ -23,13 +28,12 @@
 <p>Putting all the pieces of a model - creation, display, deleting - by yourself is a tedious process. So Rails makes it easy for you by giving you a command called <code>rails generate</code></p>
 <div class=mycode>
 rails&nbsp;generate&nbsp;scaffold&nbsp;Post&nbsp;body:string&nbsp;posted_on:datetime<br/>
-<span style='color: red'>#&nbsp;You&nbsp;can&nbsp;also&nbsp;type&nbsp;in&nbsp;'g'&nbsp;instead&nbsp;of&nbsp;'generate',&nbsp;as&nbsp;a&nbsp;shortcut</span>
+<span class='comment'>#&nbsp;You&nbsp;can&nbsp;also&nbsp;type&nbsp;in&nbsp;'g'&nbsp;instead&nbsp;of&nbsp;'generate',&nbsp;as&nbsp;a&nbsp;shortcut</span>
 </div>
 
 <p>The <code>rails generate scaffold</code> command does the following:</p>
 
 <ul>
-<li>Create a set of <em>RESTful</em> routes for this model, using the <code>resources</code> method in the <code>routes.rb</code> file</li>
 <li>Create a model that has the attributes with the data types specified in the <code>rails generate</code> command
 
 <ul>
@@ -44,23 +48,24 @@ rails&nbsp;generate&nbsp;scaffold&nbsp;Post&nbsp;body:string&nbsp;posted_on:date
 <li><strong>D</strong>elete: Yep, delete an instance</li>
 </ul></li>
 <li>Generate the controllers corresponding to these views</li>
+<li>Create a set of <em>RESTful</em> routes to match a set of paths (with corresponding actions) to the actions created for this model, using the <code>resources</code> method in the <code>routes.rb</code> file</li>
 </ul>
 
-<p>Those four actions constitute the Four Horsemen of the RESTful Apocalypse (to be fanciful about it) - they are typically referred to as the <strong>CRUD</strong> actions for a RESTful resource.</p>
+<p>Those four actions constitute the Four Horsemen of the RESTful Apocalypse (to be fanciful about it) - they are typically referred to as the <strong>CRUD</strong> actions for a RESTful resource. Many tricks in Rails magic make it easy to build these RESTful actions.</p>
 
-<p>You can also do these steps through <code>rails generate</code> individually (except for the addition of the route set, which you&rsquo;d have to do via your editor), by running them in this order:</p>
+<p>You can also perform these steps individually through <code>rails generate</code> (except for the addition of the route set, which you&rsquo;d have to do via your editor), by running them in this order:</p>
 <div class=mycode>
 rails&nbsp;generate&nbsp;model&nbsp;Post&nbsp;body:string&nbsp;posted_on:datetime<br/>
-rails&nbsp;generate&nbsp;controller&nbsp;Post&nbsp;<span style='color: red'>#&nbsp;This&nbsp;generates&nbsp;the&nbsp;views&nbsp;too.</span>
+rails&nbsp;generate&nbsp;controller&nbsp;Post&nbsp;<span class='comment'>#&nbsp;This&nbsp;generates&nbsp;the&nbsp;views&nbsp;too.</span>
 </div>
 
 <p>When you use scaffolding, Rails magic works in some very specific ways:</p>
 
 <ul>
-<li>The model is named assuming the model name is in a singular form, and is capitalized.
+<li>The model is named assuming the model name is in a <em>singular</em> form, and is capitalized because it&rsquo;s a Ruby class name, which have to be capitalized.
 
 <ul>
-<li><strong>But</strong>: the corresponding database table is named in the plural form, and starts with a lowercase letter. So the name of the table for our <code>Post</code> model above, in the database, is <code>posts</code></li>
+<li><strong>But</strong>: the corresponding database table is named in the <em>plural</em> form, and starts with a lowercase letter. So the name of the table for our <code>Post</code> model above, in the database, is <code>posts</code></li>
 </ul></li>
 <li>The controller is capitalized too, but it&rsquo;s named using the <em>plural</em> form of the model name. So the name of the controller created by <code>rails generate scaffold</code> is <code>PostsController</code> (note the plural.)</li>
 <li>The views are in a folder that&rsquo;s named by the plural form - so our views for the <code>Post</code> model are in the folder <code>app/views/posts</code></li>
@@ -78,7 +83,11 @@ tasks is to set up your database tables. That task is called
 rake&nbsp;db:migrate
 </div>
 
-<h1 id="toc_3">Advanced Topics</h1>
+<h2 id="toc_3">Playing Around With Your Models</h2>
+
+<p>In the next section, we&rsquo;ll explore the <em>Rails Console</em>: now that you have a database that can accomodate your models&#39; data, let&rsquo;s create some instances.</p>
+
+<h1 id="toc_4">Advanced Topics</h1>
 
 <p>Here are some more topics you can read once you&rsquo;ve become comfortable with the above material:</p>
 

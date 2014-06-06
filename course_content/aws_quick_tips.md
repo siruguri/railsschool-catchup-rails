@@ -1,10 +1,10 @@
 # Setting Up A (Nearly Free) EC2 instance
 
 If you need a VPS, you can create an AWS account with a credit card -
-the "AWS Free Usage Tier" is close enough to being free, as you'll
-only pay about a dollar a month for the corresponding storage. The
-tier allows you to launch an EC2 Micro instance, and the CPU is free
-for 1 year.
+the "AWS Free Usage Tier" is close enough to being free. Note though
+that you will get only 30GB of storage, and will still have to pay if
+you add more disk space. Also, your CPU time is limited to about 72
+hours per month - you have to pay for any usage that exceeds that.
 
 ## Pre-requisites
 
@@ -15,8 +15,8 @@ This mini-guide assumes you already have familiarity with a command prompt, wher
 * Once you've created your AWS account on Amazon, log in to the AWS Management Console and click on "EC2".
 * click the blue "Launch Instance" button and complete the following steps:
   * Select the "Quick Launch Wizard" radio button
-  * Create a new key pair and save it in the `~/.ssh` directory on your local machine. It will be saved with a `.pem` extension, by default.
-  * Choose the Launch Configuration labeled "Ubuntu Server 12.04.2 LTS" and select the "32-bit" radio button. (Note that these options might change in the future - they were available as of Oct 2013.)
+  * Create a new key pair and save the private key component in the `~/.ssh` directory on your local machine. It will be saved with a `.pem` extension, by default.
+  * Choose the Launch Configuration labeled "Ubuntu Server 12.04.2 LTS" and select the "64-bit" radio button. (Note that these options might change in the future - they were available as of Feb 2014.)
 * Click "Continue"
 * Click "Launch".
 

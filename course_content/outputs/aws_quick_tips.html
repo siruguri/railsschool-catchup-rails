@@ -16,10 +16,10 @@
 <h1 id="toc_0">Setting Up A (Nearly Free) EC2 instance</h1>
 
 <p>If you need a VPS, you can create an AWS account with a credit card -
-the &ldquo;AWS Free Usage Tier&rdquo; is close enough to being free, as you&rsquo;ll
-only pay about a dollar a month for the corresponding storage. The
-tier allows you to launch an EC2 Micro instance, and the CPU is free
-for 1 year.</p>
+the &ldquo;AWS Free Usage Tier&rdquo; is close enough to being free. Note though
+that you will get only 30GB of storage, and will still have to pay if
+you add more disk space. Also, your CPU time is limited to about 72
+hours per month - you have to pay for any usage that exceeds that.</p>
 
 <h2 id="toc_1">Pre-requisites</h2>
 
@@ -33,8 +33,8 @@ for 1 year.</p>
 
 <ul>
 <li>Select the &ldquo;Quick Launch Wizard&rdquo; radio button</li>
-<li>Create a new key pair and save it in the <code>~/.ssh</code> directory on your local machine. It will be saved with a <code>.pem</code> extension, by default.</li>
-<li>Choose the Launch Configuration labeled &ldquo;Ubuntu Server 12.04.2 LTS&rdquo; and select the &ldquo;32-bit&rdquo; radio button. (Note that these options might change in the future - they were available as of Oct 2013.)</li>
+<li>Create a new key pair and save the private key component in the <code>~/.ssh</code> directory on your local machine. It will be saved with a <code>.pem</code> extension, by default.</li>
+<li>Choose the Launch Configuration labeled &ldquo;Ubuntu Server 12.04.2 LTS&rdquo; and select the &ldquo;64-bit&rdquo; radio button. (Note that these options might change in the future - they were available as of Feb 2014.)</li>
 </ul></li>
 <li>Click &ldquo;Continue&rdquo;</li>
 <li>Click &ldquo;Launch&rdquo;.</li>
@@ -49,7 +49,7 @@ for 1 year.</p>
 <p>Shell into your instance from your command prompt:</p>
 <div class=mycode>
 $&nbsp;ssh&nbsp;ubuntu@[your-machine-name]&nbsp;-i&nbsp;~/.ssh/aws-personal-key.pem<br/>
-<span style='color: red'>#&nbsp;Replace&nbsp;the&nbsp;key&nbsp;file&nbsp;name&nbsp;with&nbsp;whatever&nbsp;you&nbsp;named&nbsp;your&nbsp;key&nbsp;file.</span>
+<span class='comment'>#&nbsp;Replace&nbsp;the&nbsp;key&nbsp;file&nbsp;name&nbsp;with&nbsp;whatever&nbsp;you&nbsp;named&nbsp;your&nbsp;key&nbsp;file.</span>
 </div>
 
 <p>Once you can shell into your instance, you are ready to play around with your own Unix instance. Note though that the instance doesn&rsquo;t come with Ruby or Rails - you still have to <a href="https://help.ubuntu.com/10.04/serverguide/ruby-on-rails.html">install them</a>.</p>
