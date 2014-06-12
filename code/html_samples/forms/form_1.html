@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>
+      Forms Example 1
+    </title>
+    <link rel="stylesheet"  type="text/css"  href="style.css"/>
+  </head>
+
+  <body>
+    <form action='http://localhost:3000/print_all' method='get'>
+      Enter your input
+      <input name='text_box' type='text'></input><br/>
+      <select name='dropdown'>
+	<option value='1'> Dropdown option 1 </option>
+	<option value='2'> Dropdown option 2 </option>
+      </select>
+      <input type='checkbox' name='checkboxes[]' value='1'>Checkbox 1
+      <input type='checkbox' name='checkboxes[]' value='2'>Checkbox 2
+      <input type='checkbox' name='checkboxes[]' value='3'>Checkbox 3
+    <input type='submit' />
+    </form>
+  </body>
+</html>
