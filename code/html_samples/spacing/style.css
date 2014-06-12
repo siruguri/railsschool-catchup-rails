@@ -1,0 +1,12 @@
+/* The . before the class name means that it's defined in a class attribute */
+.red-box {
+    border: 5px solid red;
+    margin: 5px;
+}
+
+/* The # before the class name means that it's defined in an ID attribute */
+#blue-box {
+    border: 5px solid blue;
+    background: lightblue;
+    padding: 10px;
+}
