@@ -1,0 +1,6 @@
+<form action='/edit_mayor' method='get'>
+  <input type='hidden' name='city[id]' value='<%= @town.id %>' />
+  Enter mayor's name:<br/>
+  <input type='text' name='city[mayor[name]]' value="<%=@mayor.name %>"/>
+  <input type='submit' />
+</form>

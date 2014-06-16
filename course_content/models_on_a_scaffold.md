@@ -55,3 +55,4 @@ Here are some more topics you can read once you've become comfortable with the a
   * Look into how the `text` datatype is different from the `string` datatype.
 * What are the other ways of writing view files?
   * Look into what HAML is.
+* Should you use scaffolds or build your own routes? There are varying opinions about the pros and cons of scaffolding - it's worth your time to read a [few discussions](http://stackoverflow.com/questions/6735468/why-do-ruby-on-rails-professionals-not-use-scaffolding) [about it](http://programmers.stackexchange.com/questions/75011/do-experienced-ruby-on-rails-developers-use-scaffolding), once you get into serious Rails programming.
