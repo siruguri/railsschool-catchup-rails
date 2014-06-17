@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cityname: MyString
+  mayorname: MyString
+  population: 1
+
+two:
+  cityname: MyString
+  mayorname: MyString
+  population: 1

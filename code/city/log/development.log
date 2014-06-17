@@ -1,0 +1,802 @@
+  [1m[36m (1.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (1.4ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateTowns (20140613012314)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mCREATE TABLE "towns" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "population" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140613012314"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (361.8ms)[0m  INSERT INTO "towns" ("created_at", "name", "population", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", Fri, 13 Jun 2014 01:36:59 UTC +00:00], ["name", "San Francisco"], ["population", 750000], ["updated_at", Fri, 13 Jun 2014 01:36:59 UTC +00:00]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.4ms)[0m  [1mINSERT INTO "towns" ("created_at", "name", "population", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", Fri, 13 Jun 2014 01:37:38 UTC +00:00], ["name", "Oakland"], ["population", 300000], ["updated_at", Fri, 13 Jun 2014 01:37:38 UTC +00:00]]
+  [1m[35m (2.6ms)[0m  commit transaction
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mTown Load (0.3ms)[0m  SELECT "towns".* FROM "towns" WHERE "towns"."name" = 'Oakland' LIMIT 1
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."population" = 3000 LIMIT 1[0m
+  [1m[35mTown Load (0.3ms)[0m  SELECT "towns".* FROM "towns" WHERE "towns"."population" = 300000 LIMIT 1
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."population" = 750000 LIMIT 1[0m
+  [1m[35mTown Load (0.3ms)[0m  SELECT "towns".* FROM "towns"
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" ORDER BY "towns"."id" ASC LIMIT 1[0m
+  [1m[35mSQL (3.5ms)[0m  DELETE FROM "towns" WHERE "towns"."id" = 1
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" ORDER BY "towns"."id" ASC LIMIT 1[0m
+  [1m[35mSQL (2.8ms)[0m  DELETE FROM "towns" WHERE "towns"."id" = 2
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" ORDER BY "towns"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.3ms)[0m  [1mINSERT INTO "towns" ("created_at", "name", "population", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", Fri, 13 Jun 2014 01:51:24 UTC +00:00], ["name", "SFO"], ["population", 750000], ["updated_at", Fri, 13 Jun 2014 01:51:24 UTC +00:00]]
+  [1m[35m (1.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO "towns" ("created_at", "name", "population", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", Fri, 13 Jun 2014 01:53:56 UTC +00:00], ["name", "Oakland"], ["population", 350000], ["updated_at", Fri, 13 Jun 2014 01:53:56 UTC +00:00]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/population?name=Oakland" for 127.0.0.1 at 2014-06-12 19:02:34 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by CityController#get_population as HTML
+  Parameters: {"name"=>"Oakland"}
+Completed 500 Internal Server Error in 32ms
+
+NoMethodError (undefined method `find_by_name' for City:Module):
+  app/controllers/city_controller.rb:4:in `get_population'
+
+
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.2ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (33.2ms)
+
+
+Started GET "/population?name=Oakland" for 127.0.0.1 at 2014-06-12 19:02:47 -0700
+Processing by CityController#get_population as HTML
+  Parameters: {"name"=>"Oakland"}
+  [1m[35mTown Load (0.3ms)[0m  SELECT "towns".* FROM "towns" WHERE "towns"."name" = 'Oakland' LIMIT 1
+  Rendered city/get_population.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 952ms (Views: 900.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-12 19:02:48 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-12 19:02:48 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-12 19:02:48 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-12 19:02:48 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-12 19:02:48 -0700
+
+
+Started GET "/population?name=San%20Francisco" for 127.0.0.1 at 2014-06-12 19:03:29 -0700
+Processing by CityController#get_population as HTML
+  Parameters: {"name"=>"San Francisco"}
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'San Francisco' LIMIT 1[0m
+Completed 500 Internal Server Error in 3ms
+
+NoMethodError (undefined method `population' for nil:NilClass):
+  app/controllers/city_controller.rb:6:in `get_population'
+
+
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.1ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (5.2ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.0ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (36.3ms)
+
+
+Started GET "/population?name=San%20Francisco" for 127.0.0.1 at 2014-06-12 19:03:33 -0700
+Processing by CityController#get_population as HTML
+  Parameters: {"name"=>"San Francisco"}
+  [1m[35mTown Load (0.3ms)[0m  SELECT "towns".* FROM "towns" WHERE "towns"."name" = 'San Francisco' LIMIT 1
+Completed 500 Internal Server Error in 10ms
+
+NoMethodError (undefined method `population' for nil:NilClass):
+  app/controllers/city_controller.rb:6:in `get_population'
+
+
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.1ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (3.0ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.4ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (35.0ms)
+  [1m[35mTown Load (0.3ms)[0m  SELECT "towns".* FROM "towns"
+
+
+Started GET "/population?name=SFO" for 127.0.0.1 at 2014-06-12 19:07:07 -0700
+Processing by CityController#get_population as HTML
+  Parameters: {"name"=>"SFO"}
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1[0m
+  Rendered city/get_population.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 14ms (Views: 11.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-12 19:07:08 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-12 19:07:08 -0700
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-12 19:07:08 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-12 19:07:08 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-12 19:07:08 -0700
+
+
+Started GET "/population?name=lskdjflskjdf" for 127.0.0.1 at 2014-06-12 19:08:11 -0700
+Processing by CityController#get_population as HTML
+  Parameters: {"name"=>"lskdjflskjdf"}
+  [1m[35mTown Load (0.2ms)[0m  SELECT "towns".* FROM "towns" WHERE "towns"."name" = 'lskdjflskjdf' LIMIT 1
+Completed 500 Internal Server Error in 3ms
+
+NoMethodError (undefined method `population' for nil:NilClass):
+  app/controllers/city_controller.rb:6:in `get_population'
+
+
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.5ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.1ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.7ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.0-preview1/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (39.7ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddMayorNameToCity (20140613021718)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "cities" ADD "mayor_name" varchar(255)[0m
+SQLite3::SQLException: no such table: cities: ALTER TABLE "cities" ADD "mayor_name" varchar(255)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddMayorNameToTown (20140613021926)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.8ms)[0m  [1mALTER TABLE "towns" ADD "mayor_name" varchar(255)[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140613021926"]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/mayor?name=SFO" for 127.0.0.1 at 2014-06-12 19:28:42 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by CityController#get_mayor as HTML
+  Parameters: {"name"=>"SFO"}
+  [1m[35mTown Load (0.2ms)[0m  SELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1
+  Rendered city/get_mayor.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 23ms (Views: 8.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-12 19:28:42 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-12 19:28:42 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-12 19:28:42 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-12 19:28:42 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-12 19:28:42 -0700
+
+
+Started GET "/mayor?name=Oakland" for 127.0.0.1 at 2014-06-12 19:28:57 -0700
+Processing by CityController#get_mayor as HTML
+  Parameters: {"name"=>"Oakland"}
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'Oakland' LIMIT 1[0m
+  Rendered city/get_mayor.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 9ms (Views: 6.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-12 19:28:57 -0700
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-12 19:28:57 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-12 19:28:57 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-12 19:28:57 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-12 19:28:57 -0700
+
+
+Started GET "/mayor?name=Oakland" for 127.0.0.1 at 2014-06-12 19:29:36 -0700
+Processing by CityController#get_mayor as HTML
+  Parameters: {"name"=>"Oakland"}
+  [1m[35mTown Load (0.3ms)[0m  SELECT "towns".* FROM "towns" WHERE "towns"."name" = 'Oakland' LIMIT 1
+  Rendered city/get_mayor.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 7ms (Views: 5.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-12 19:29:36 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-12 19:29:36 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-12 19:29:36 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-12 19:29:37 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-12 19:29:37 -0700
+  [1m[36mTown Load (0.7ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1[0m
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (4.3ms)[0m  [1mUPDATE "towns" SET "mayor_name" = ?, "updated_at" = ? WHERE "towns"."id" = 3[0m  [["mayor_name", "Edwin Lee"], ["updated_at", Fri, 13 Jun 2014 02:36:54 UTC +00:00]]
+  [1m[35m (1.3ms)[0m  commit transaction
+
+
+Started GET "/mayor?name=SFO" for 127.0.0.1 at 2014-06-12 19:37:35 -0700
+Processing by CityController#get_mayor as HTML
+  Parameters: {"name"=>"SFO"}
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1[0m
+  Rendered city/get_mayor.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 9ms (Views: 6.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-12 19:37:35 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-12 19:37:35 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-12 19:37:35 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-12 19:37:35 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-12 19:37:35 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateMayors (20140613031948)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.7ms)[0m  [1mCREATE TABLE "mayors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "age" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140613031948"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.4ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddMayorIdToTown (20140613032214)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.8ms)[0m  [1mALTER TABLE "towns" ADD "mayor_id" integer[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140613032214"]]
+  [1m[36m (1.3ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (4.3ms)[0m  INSERT INTO "mayors" ("age", "created_at", "name", "updated_at") VALUES (?, ?, ?, ?)  [["age", 25], ["created_at", Fri, 13 Jun 2014 03:27:40 UTC +00:00], ["name", "Edwin Lee"], ["updated_at", Fri, 13 Jun 2014 03:27:40 UTC +00:00]]
+  [1m[36m (2.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "mayors" ("age", "created_at", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["age", 30], ["created_at", Fri, 13 Jun 2014 03:29:30 UTC +00:00], ["name", "Jeanne Quan"], ["updated_at", Fri, 13 Jun 2014 03:29:30 UTC +00:00]]
+  [1m[35m (1.2ms)[0m  commit transaction
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns"[0m
+  [1m[35mTown Load (0.3ms)[0m  SELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE "towns" SET "mayor_id" = ?, "updated_at" = ? WHERE "towns"."id" = 3  [["mayor_id", 1], ["updated_at", Fri, 13 Jun 2014 03:31:49 UTC +00:00]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mTown Load (0.3ms)[0m  SELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1
+  [1m[36mMayor Load (0.3ms)[0m  [1mSELECT "mayors".* FROM "mayors" WHERE "mayors"."name" = 'Edwin Lee' LIMIT 1[0m
+  [1m[35mMayor Load (0.3ms)[0m  SELECT "mayors".* FROM "mayors" WHERE "mayors"."name" = 'Jeanne Quan' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.4ms)[0m  UPDATE "towns" SET "mayor_id" = ?, "updated_at" = ? WHERE "towns"."id" = 3  [["mayor_id", 2], ["updated_at", Fri, 13 Jun 2014 03:33:49 UTC +00:00]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/mayor?name=SFO" for 127.0.0.1 at 2014-06-12 20:44:49 -0700
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Processing by CityController#get_mayor as HTML
+  Parameters: {"name"=>"SFO"}
+  [1m[36mTown Load (0.2ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1[0m
+  [1m[35mMayor Load (3.0ms)[0m  SELECT "mayors".* FROM "mayors" WHERE "mayors"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered city/get_mayor.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 88ms (Views: 6.1ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-12 20:44:49 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-12 20:44:49 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-12 20:44:49 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-12 20:44:49 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-12 20:44:49 -0700
+  [1m[35mMayor Load (0.3ms)[0m  SELECT "mayors".* FROM "mayors" WHERE "mayors"."name" = 'Jeanne Quan' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE "mayors" SET "age" = ?, "updated_at" = ? WHERE "mayors"."id" = 2  [["age", 31], ["updated_at", Fri, 13 Jun 2014 03:47:00 UTC +00:00]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/mayor?name=SFO" for 127.0.0.1 at 2014-06-12 20:47:03 -0700
+Processing by CityController#get_mayor as HTML
+  Parameters: {"name"=>"SFO"}
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1[0m
+  [1m[35mMayor Load (0.2ms)[0m  SELECT "mayors".* FROM "mayors" WHERE "mayors"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered city/get_mayor.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 8ms (Views: 4.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-12 20:47:03 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-12 20:47:03 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-12 20:47:03 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-12 20:47:03 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-12 20:47:03 -0700
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "mayors" ("age", "created_at", "name", "updated_at") VALUES (?, ?, ?, ?)[0m  [["age", 42], ["created_at", Fri, 13 Jun 2014 03:49:09 UTC +00:00], ["name", "Bob Smith"], ["updated_at", Fri, 13 Jun 2014 03:49:09 UTC +00:00]]
+  [1m[35m (1.5ms)[0m  commit transaction
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1[0m
+  [1m[35mMayor Load (0.3ms)[0m  SELECT "mayors".* FROM "mayors" WHERE "mayors"."name" = 'Bob Smith' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE "towns" SET "mayor_id" = ?, "updated_at" = ? WHERE "towns"."id" = 3  [["mayor_id", 3], ["updated_at", Fri, 13 Jun 2014 03:50:42 UTC +00:00]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/mayor?name=SFO" for 127.0.0.1 at 2014-06-12 20:50:45 -0700
+Processing by CityController#get_mayor as HTML
+  Parameters: {"name"=>"SFO"}
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1[0m
+  [1m[35mMayor Load (0.2ms)[0m  SELECT "mayors".* FROM "mayors" WHERE "mayors"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered city/get_mayor.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 10ms (Views: 5.8ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-12 20:50:45 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-12 20:50:45 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-12 20:50:45 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-12 20:50:45 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-12 20:50:45 -0700
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (41.7ms)[0m  INSERT INTO "towns" ("created_at", "population", "updated_at") VALUES (?, ?, ?)  [["created_at", Fri, 13 Jun 2014 16:14:59 UTC +00:00], ["population", 4], ["updated_at", Fri, 13 Jun 2014 16:14:59 UTC +00:00]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mUPDATE "towns" SET "population" = ?, "updated_at" = ? WHERE "towns"."id" = 5[0m  [["population", 0], ["updated_at", Fri, 13 Jun 2014 16:15:12 UTC +00:00]]
+  [1m[35m (2.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE "towns" SET "created_at" = ?, "updated_at" = ? WHERE "towns"."id" = 5  [["created_at", nil], ["updated_at", Fri, 13 Jun 2014 16:15:45 UTC +00:00]]
+  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.5ms)[0m  [1mUPDATE "towns" SET "created_at" = ?, "updated_at" = ? WHERE "towns"."id" = 5[0m  [["created_at", Fri, 13 Jun 2014 15:00:00 UTC +00:00], ["updated_at", Fri, 13 Jun 2014 16:16:56 UTC +00:00]]
+  [1m[35m (2.6ms)[0m  commit transaction
+
+
+Started GET "/edit_mayor?cityname=SFO" for 127.0.0.1 at 2014-06-14 17:10:23 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by CityController#edit_mayor as HTML
+  Parameters: {"cityname"=>"SFO"}
+Completed 500 Internal Server Error in 57ms
+
+NameError (undefined local variable or method `cityname' for #<CityController:0x007fae1d14f938>):
+  app/controllers/city_controller.rb:20:in `edit_mayor'
+
+
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.1ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.6ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.8ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (34.2ms)
+
+
+Started GET "/edit_mayor?cityname=SFO" for 127.0.0.1 at 2014-06-14 17:10:45 -0700
+Processing by CityController#edit_mayor as HTML
+  Parameters: {"cityname"=>"SFO"}
+  [1m[35mTown Load (17.2ms)[0m  SELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1
+Completed 500 Internal Server Error in 58ms
+
+NameError (undefined local variable or method `c' for #<CityController:0x007fae1ae191a8>):
+  app/controllers/city_controller.rb:21:in `edit_mayor'
+
+
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.0ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.8ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.3ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (34.7ms)
+
+
+Started GET "/edit_mayor?cityname=SFO" for 127.0.0.1 at 2014-06-14 17:10:52 -0700
+Processing by CityController#edit_mayor as HTML
+  Parameters: {"cityname"=>"SFO"}
+  [1m[36mTown Load (0.2ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1[0m
+  [1m[35mMayor Load (18.5ms)[0m  SELECT "mayors".* FROM "mayors" WHERE "mayors"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered city/edit_mayor.html.erb within layouts/application (16.3ms)
+Completed 500 Internal Server Error in 113ms
+
+ActionView::Template::Error (undefined method `town_path' for #<#<Class:0x007fae1af33368>:0x007fae1af31e50>):
+    1: 
+    2: <%= form_for(@town) do |f| %>
+    3:   <%= f.label :name %>
+    4:   <%= f.text_field :name %>
+    5:   
+  app/views/city/edit_mayor.html.erb:2:in `_app_views_city_edit_mayor_html_erb___2557725104310515159_70192876575380'
+
+
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.8ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.4ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (19.8ms)
+
+
+Started GET "/edit_mayor?cityname=SFO" for 127.0.0.1 at 2014-06-14 17:15:45 -0700
+Processing by CityController#edit_mayor as HTML
+  Parameters: {"cityname"=>"SFO"}
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1[0m
+  [1m[35mMayor Load (0.3ms)[0m  SELECT "mayors".* FROM "mayors" WHERE "mayors"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered city/edit_mayor.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 1071ms (Views: 1035.9ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-14 17:15:47 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-14 17:15:47 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-14 17:15:47 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-14 17:15:47 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-14 17:15:47 -0700
+
+
+Started POST "/edit_mayor" for 127.0.0.1 at 2014-06-14 17:15:57 -0700
+Processing by CityController#update_mayor as HTML
+  Parameters: {"city"=>{"id"=>"3", "mayor"=>{"name"=>"hello"}}}
+Can't verify CSRF token authenticity
+Completed 422 Unprocessable Entity in 1ms
+
+ActionController::InvalidAuthenticityToken (ActionController::InvalidAuthenticityToken):
+  actionpack (4.0.5) lib/action_controller/metal/request_forgery_protection.rb:166:in `handle_unverified_request'
+  actionpack (4.0.5) lib/action_controller/metal/request_forgery_protection.rb:173:in `handle_unverified_request'
+  actionpack (4.0.5) lib/action_controller/metal/request_forgery_protection.rb:180:in `verify_authenticity_token'
+  activesupport (4.0.5) lib/active_support/callbacks.rb:377:in `_run__3944781111494236178__process_action__callbacks'
+  activesupport (4.0.5) lib/active_support/callbacks.rb:80:in `run_callbacks'
+  actionpack (4.0.5) lib/abstract_controller/callbacks.rb:17:in `process_action'
+  actionpack (4.0.5) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.0.5) lib/action_controller/metal/instrumentation.rb:31:in `block in process_action'
+  activesupport (4.0.5) lib/active_support/notifications.rb:159:in `block in instrument'
+  activesupport (4.0.5) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.0.5) lib/active_support/notifications.rb:159:in `instrument'
+  actionpack (4.0.5) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.0.5) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.0.5) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.0.5) lib/abstract_controller/base.rb:136:in `process'
+  actionpack (4.0.5) lib/abstract_controller/rendering.rb:44:in `process'
+  actionpack (4.0.5) lib/action_controller/metal.rb:195:in `dispatch'
+  actionpack (4.0.5) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.0.5) lib/action_controller/metal.rb:231:in `block in action'
+  actionpack (4.0.5) lib/action_dispatch/routing/route_set.rb:80:in `call'
+  actionpack (4.0.5) lib/action_dispatch/routing/route_set.rb:80:in `dispatch'
+  actionpack (4.0.5) lib/action_dispatch/routing/route_set.rb:48:in `call'
+  actionpack (4.0.5) lib/action_dispatch/journey/router.rb:71:in `block in call'
+  actionpack (4.0.5) lib/action_dispatch/journey/router.rb:59:in `each'
+  actionpack (4.0.5) lib/action_dispatch/journey/router.rb:59:in `call'
+  actionpack (4.0.5) lib/action_dispatch/routing/route_set.rb:674:in `call'
+  rack (1.5.2) lib/rack/etag.rb:23:in `call'
+  rack (1.5.2) lib/rack/conditionalget.rb:35:in `call'
+  rack (1.5.2) lib/rack/head.rb:11:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/flash.rb:241:in `call'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.5.2) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/cookies.rb:486:in `call'
+  activerecord (4.0.5) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.0.5) lib/active_record/connection_adapters/abstract/connection_pool.rb:626:in `call'
+  activerecord (4.0.5) lib/active_record/migration.rb:373:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.0.5) lib/active_support/callbacks.rb:373:in `_run__3523118516377717864__call__callbacks'
+  activesupport (4.0.5) lib/active_support/callbacks.rb:80:in `run_callbacks'
+  actionpack (4.0.5) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/reloader.rb:64:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.5) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.5) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.5) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.0.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.0.5) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.0.5) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.5) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.5) lib/rails/engine.rb:511:in `call'
+  railties (4.0.5) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /Users/sameer/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /Users/sameer/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /Users/sameer/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.8ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.7ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.7ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (21.6ms)
+
+
+Started POST "/edit_mayor" for 127.0.0.1 at 2014-06-14 17:18:02 -0700
+
+ActionController::RoutingError (No route matches [POST] "/edit_mayor"):
+  actionpack (4.0.5) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.0.5) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.0.5) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.0.5) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.0.5) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.0.5) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.0.5) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.0.5) lib/active_support/cache/strategy/local_cache.rb:83:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.0.5) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.0.5) lib/rails/engine.rb:511:in `call'
+  railties (4.0.5) lib/rails/application.rb:97:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /Users/sameer/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /Users/sameer/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /Users/sameer/.rvm/rubies/ruby-2.1.1/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.2ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.3ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/routes/_table.html.erb (32.4ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (66.0ms)
+
+
+Started GET "/edit_mayor?cityname=SFO" for 127.0.0.1 at 2014-06-14 17:18:06 -0700
+Processing by CityController#edit_mayor as HTML
+  Parameters: {"cityname"=>"SFO"}
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1[0m
+  [1m[35mMayor Load (0.2ms)[0m  SELECT "mayors".* FROM "mayors" WHERE "mayors"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered city/edit_mayor.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 35ms (Views: 7.7ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-14 17:18:06 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-14 17:18:06 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-14 17:18:06 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-14 17:18:06 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-14 17:18:06 -0700
+
+
+Started GET "/edit_mayor?city%5Bid%5D=3&city%5Bmayor%5Bname%5D%5D=hello" for 127.0.0.1 at 2014-06-14 17:18:07 -0700
+Processing by CityController#edit_mayor as HTML
+  Parameters: {"city"=>{"id"=>"3", "mayor"=>{"name"=>"hello"}}}
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."id" = ? LIMIT 1[0m  [["id", "3"]]
+  [1m[35mMayor Load (0.2ms)[0m  SELECT "mayors".* FROM "mayors" WHERE "mayors"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (49.1ms)[0m  UPDATE "mayors" SET "name" = ?, "updated_at" = ? WHERE "mayors"."id" = 3  [["name", nil], ["updated_at", Sun, 15 Jun 2014 00:18:07 UTC +00:00]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  Rendered city/edit_mayor.html.erb within layouts/application (1.1ms)
+Completed 500 Internal Server Error in 75ms
+
+ActionView::Template::Error (undefined method `id' for nil:NilClass):
+    1: <form action='/edit_mayor' method='get'>
+    2:   <input type='hidden' name='city[id]' value='<%= @town.id %>' />
+    3:   Enter mayor's name:<br/>
+    4:   <input type='text' name='city[mayor[name]]' />
+    5:   <input type='submit' />
+  app/views/city/edit_mayor.html.erb:2:in `_app_views_city_edit_mayor_html_erb___2557725104310515159_70192874162480'
+
+
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.9ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.5ms)
+  Rendered /Users/sameer/.rvm/gems/ruby-2.1.1@rails4/gems/actionpack-4.0.5/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (20.5ms)
+
+
+Started GET "/edit_mayor?cityname=SFO" for 127.0.0.1 at 2014-06-14 17:19:21 -0700
+Processing by CityController#edit_mayor as HTML
+  Parameters: {"cityname"=>"SFO"}
+  [1m[35mTown Load (0.2ms)[0m  SELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1
+  [1m[36mMayor Load (0.2ms)[0m  [1mSELECT "mayors".* FROM "mayors" WHERE "mayors"."id" = ? LIMIT 1[0m  [["id", 3]]
+  Rendered city/edit_mayor.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 25ms (Views: 4.8ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-14 17:19:22 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-14 17:19:22 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-14 17:19:22 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-14 17:19:22 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-14 17:19:22 -0700
+
+
+Started GET "/edit_mayor?city%5Bid%5D=3&city%5Bmayor%5Bname%5D%5D=hello" for 127.0.0.1 at 2014-06-14 17:19:25 -0700
+Processing by CityController#edit_mayor as HTML
+  Parameters: {"city"=>{"id"=>"3", "mayor"=>{"name"=>"hello"}}}
+  [1m[35mTown Load (0.4ms)[0m  SELECT "towns".* FROM "towns" WHERE "towns"."id" = ? LIMIT 1  [["id", "3"]]
+  [1m[36mMayor Load (0.2ms)[0m  [1mSELECT "mayors".* FROM "mayors" WHERE "mayors"."id" = ? LIMIT 1[0m  [["id", 3]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.0ms)[0m  [1mUPDATE "mayors" SET "name" = ?, "updated_at" = ? WHERE "mayors"."id" = 3[0m  [["name", "hello"], ["updated_at", Sun, 15 Jun 2014 00:19:25 UTC +00:00]]
+  [1m[35m (1.7ms)[0m  commit transaction
+  Rendered city/edit_mayor.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 16ms (Views: 4.7ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-14 17:19:25 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-14 17:19:25 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-14 17:19:25 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-14 17:19:25 -0700
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-14 17:19:25 -0700
+
+
+Started GET "/edit_mayor?cityname=SFO" for 127.0.0.1 at 2014-06-14 17:19:47 -0700
+Processing by CityController#edit_mayor as HTML
+  Parameters: {"cityname"=>"SFO"}
+  [1m[36mTown Load (0.2ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1[0m
+  [1m[35mMayor Load (0.2ms)[0m  SELECT "mayors".* FROM "mayors" WHERE "mayors"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered city/edit_mayor.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 27ms (Views: 6.8ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-14 17:19:47 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-14 17:19:47 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-14 17:19:47 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-14 17:19:47 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-14 17:19:47 -0700
+
+
+Started GET "/edit_mayor?city%5Bid%5D=3&city%5Bmayor%5Bname%5D%5D=hello" for 127.0.0.1 at 2014-06-14 17:20:14 -0700
+Processing by CityController#edit_mayor as HTML
+  Parameters: {"city"=>{"id"=>"3", "mayor"=>{"name"=>"hello"}}}
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."id" = ? LIMIT 1[0m  [["id", "3"]]
+  [1m[35mMayor Load (0.2ms)[0m  SELECT "mayors".* FROM "mayors" WHERE "mayors"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+  Rendered city/edit_mayor.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 12ms (Views: 5.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-14 17:20:14 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-14 17:20:14 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-14 17:20:14 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-14 17:20:14 -0700
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-14 17:20:14 -0700
+
+
+Started GET "/edit_mayor?cityname=SFO" for 127.0.0.1 at 2014-06-14 17:20:31 -0700
+Processing by CityController#edit_mayor as HTML
+  Parameters: {"cityname"=>"SFO"}
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1[0m
+  [1m[35mMayor Load (0.2ms)[0m  SELECT "mayors".* FROM "mayors" WHERE "mayors"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered city/edit_mayor.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 14ms (Views: 10.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-14 17:20:31 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-14 17:20:31 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-14 17:20:31 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-14 17:20:31 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-14 17:20:31 -0700
+  [1m[36mTown Load (2.1ms)[0m  [1mSELECT "towns".* FROM "towns"[0m
+  [1m[35mMayor Load (0.3ms)[0m  SELECT "mayors".* FROM "mayors"
+
+
+Started GET "/edit_mayor?cityname=SFO" for 127.0.0.1 at 2014-06-14 17:22:05 -0700
+Processing by CityController#edit_mayor as HTML
+  Parameters: {"cityname"=>"SFO"}
+  [1m[36mTown Load (0.3ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."name" = 'SFO' LIMIT 1[0m
+  [1m[35mMayor Load (0.2ms)[0m  SELECT "mayors".* FROM "mayors" WHERE "mayors"."id" = ? LIMIT 1  [["id", 3]]
+  Rendered city/edit_mayor.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 12ms (Views: 6.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-14 17:22:05 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-14 17:22:05 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-14 17:22:05 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-14 17:22:05 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-14 17:22:05 -0700
+
+
+Started GET "/edit_mayor?city%5Bid%5D=3&city%5Bmayor%5Bname%5D%5D=Bob" for 127.0.0.1 at 2014-06-14 17:22:10 -0700
+Processing by CityController#edit_mayor as HTML
+  Parameters: {"city"=>{"id"=>"3", "mayor"=>{"name"=>"Bob"}}}
+  [1m[36mTown Load (0.2ms)[0m  [1mSELECT "towns".* FROM "towns" WHERE "towns"."id" = ? LIMIT 1[0m  [["id", "3"]]
+  [1m[35mMayor Load (0.2ms)[0m  SELECT "mayors".* FROM "mayors" WHERE "mayors"."id" = ? LIMIT 1  [["id", 3]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  UPDATE "mayors" SET "name" = ?, "updated_at" = ? WHERE "mayors"."id" = 3  [["name", "Bob"], ["updated_at", Sun, 15 Jun 2014 00:22:10 UTC +00:00]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+  Rendered city/edit_mayor.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 23ms (Views: 4.9ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2014-06-14 17:22:10 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2014-06-14 17:22:10 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2014-06-14 17:22:10 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2014-06-14 17:22:10 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-06-14 17:22:10 -0700
