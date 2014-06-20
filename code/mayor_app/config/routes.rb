@@ -1,5 +1,7 @@
 MayorApp::Application.routes.draw do
 
+  resources :cities
+
   get "/mayor" => "mayor#show"
 
 
