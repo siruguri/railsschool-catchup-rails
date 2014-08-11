@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @mayor.name %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @mayor.age %>
+</p>
+
+<%= link_to 'Edit', edit_mayor_path(@mayor) %> |
+<%= link_to 'Back', mayors_path %>

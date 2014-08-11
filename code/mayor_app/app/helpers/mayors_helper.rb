@@ -1,0 +1,2 @@
+module MayorsHelper
+end
