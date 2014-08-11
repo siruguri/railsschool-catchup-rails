@@ -5,6 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Age</th>
+      <th>City</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= mayor.name %></td>
         <td><%= mayor.age %></td>
+        <td><%= mayor.city ? mayor.city.name : "No city" %></td>
         <td><%= link_to 'Show', mayor %></td>
         <td><%= link_to 'Edit', edit_mayor_path(mayor) %></td>
         <td><%= link_to 'Destroy', mayor, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -69,6 +69,6 @@ class MayorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mayor_params
-      params.require(:mayor).permit(:name, :age)
+      params.require(:mayor).permit(:name, :age, :city_id)
     end
 end

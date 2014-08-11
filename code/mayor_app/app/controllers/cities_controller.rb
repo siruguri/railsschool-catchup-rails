@@ -4,6 +4,13 @@ class CitiesController < ApplicationController
   # GET /cities
   # GET /cities.json
   def index
+
+    if params[:name] and City.find_by_name params[:name]
+      redirect_to (City.find_by_name params[:name])
+    end
+    if params[:name]
+      flash[:errors] = "No such city."
+    end
     @cities = City.all
   end
 
@@ -25,9 +32,12 @@ class CitiesController < ApplicationController
   # POST /cities.json
   def create
     @city = City.new(city_params)
-
     respond_to do |format|
       if @city.save
+        mayor_id = city_params[:mayor_attributes][:id]
+        if mayor_id.to_i > 0
+          @city.mayor = Mayor.find mayor_id
+        end
         format.html { redirect_to @city, notice: 'City was successfully created.' }
         format.json { render :show, status: :created, location: @city }
       else
@@ -69,6 +79,6 @@ class CitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def city_params
-      params.require(:city).permit(:name, :population)
+      params.require(:city).permit(:name, :population, mayor_attributes: [:id])
     end
 end

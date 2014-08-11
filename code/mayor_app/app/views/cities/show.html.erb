@@ -4,9 +4,15 @@ In <%= @city.name %>,
 
 there are
   <%= @city.population %>
-people and the mayor is <%= @city.mayor_name %>
+people.
+
+<% if @city.mayor %>
+  The mayor is <%= @city.mayor.name %>
+<% else %>
+  There is no mayor for this city yet. <%= link_to "Select a mayor", mayors_path %>
+<% end %>
 
 <div>
 <%= link_to 'Edit', edit_city_path(@city) %> |
-<%= link_to 'Back', cities_path %>
+<%= link_to 'All Cities', cities_path %>
 </div>
